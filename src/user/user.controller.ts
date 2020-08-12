@@ -7,7 +7,7 @@ export class UserController {
         return 'Création utilisateur';
     }
     @Get('listChoice')
-    getUsersWithChoice(): string {
-        return 'Liste utilisateurs';
+    getUsersWithChoice(): {list: string } {
+        return {list: "aaazerertza"};
     }
 }
