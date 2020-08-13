@@ -17,7 +17,6 @@ export class UserService {
     }
     insertUser(createInformations: CreateUserDto): any {
         let userReceived = new User(createInformations.email,createInformations.pseudo,new Date(createInformations.birthDate));
-        console.log(userReceived);
         return this.usersRepository.insert(userReceived);
     }
 }
