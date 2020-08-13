@@ -10,7 +10,6 @@ export class UserController {
 
     @Post()
     createUser(@Body() createUser: CreateUserDto): {email: string, birthDate: Date} {
-        // return {email : createUser.email, birthDate : createUser.birthDate};
         return this.userService.insertUser(createUser);
     }
     @Get('listChoice')
