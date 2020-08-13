@@ -2,6 +2,7 @@ import {Injectable} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
 import {User} from "./user.entity";
 import {Repository} from "typeorm";
+import {CreateUserDto} from "./create-user.dto";
 
 @Injectable()
 export class UserService {
@@ -14,9 +15,9 @@ export class UserService {
     findAll(): Promise<User[]> {
         return this.usersRepository.find();
     }
-    insertUser(): any {
-        let u1 = new User("aa@gmail.com","pseudal",new Date("10/12/2012",));
-        console.log(u1);
-        return this.usersRepository.insert(u1);
+    insertUser(createInformations: CreateUserDto): any {
+        let userReceived = new User(createInformations.email,createInformations.pseudo,new Date(createInformations.birthDate));
+        console.log(userReceived);
+        return this.usersRepository.insert(userReceived);
     }
 }
