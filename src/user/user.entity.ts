@@ -1,6 +1,8 @@
-import {Column, CreateDateColumn, Entity, PrimaryColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique} from "typeorm";
+import {Choice} from "../choice/choice.entity";
 
 @Entity("users")
+@Unique(["email"])
 export class User {
     constructor(
         mail: string,
@@ -12,7 +14,11 @@ export class User {
         this.pseudo = pseudo;
         this.birthDate = birth;
     }
-    @PrimaryColumn()
+
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column()
     email: string;
 
     @Column()

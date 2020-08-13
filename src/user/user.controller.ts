@@ -1,6 +1,5 @@
 import {Body, Controller, Get, Post} from "@nestjs/common";
 import {CreateUserDto} from "./create-user.dto";
-import {request} from "express";
 import {User} from "./user.entity";
 import {UserService} from "./user.service";
 
@@ -11,7 +10,6 @@ export class UserController {
 
     @Post()
     createUser(@Body() createUser: CreateUserDto): {email: string, birthDate: Date} {
-        // return {email : createUser.email, birthDate : createUser.birthDate};
         return this.userService.insertUser(createUser);
     }
     @Get('listChoice')
