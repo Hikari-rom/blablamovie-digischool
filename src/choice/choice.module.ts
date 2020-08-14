@@ -7,9 +7,10 @@ import {UserService} from "../user/user.service";
 
 @Module(
     {
-        imports: [TypeOrmModule.forFeature([Choice])],
+        imports: [UserService, TypeOrmModule.forFeature([Choice])],
         controllers: [ChoiceController],
         providers: [ChoiceService],
+        exports: [ChoiceService]
     }
 )
 export class ChoiceModule{}
