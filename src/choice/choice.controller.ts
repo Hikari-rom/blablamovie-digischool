@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post} from "@nestjs/common";
+import {Body, Controller, Post} from "@nestjs/common";
 import {ChoiceService} from "./choice.service";
 import {Choice} from "./choice.entity";
 import {CreateChoiceDto} from "./create-choice.dto";

@@ -1,8 +1,8 @@
 import {Injectable} from "@nestjs/common";
 import {Choice} from "./choice.entity";
-import {InsertResult, Repository} from "typeorm";
+import {Repository} from "typeorm";
 import {InjectRepository} from "@nestjs/typeorm";
-import * as omdb from "omdbapi";
+import * as Omdb from "omdbapi";
 import {ConfigService} from "@nestjs/config";
 @Injectable()
 export class ChoiceService
@@ -14,7 +14,7 @@ export class ChoiceService
     )
     {}
     insertChoice(userId: number,searchGiven: string): any{
-        const omdbapi = new omdb(this.configService.get<string>('OMDBAPI_KEY'));
+        const omdbapi = new Omdb(this.configService.get<string>('OMDBAPI_KEY'));
         const choiceReceived =  omdbapi.search({
             search: searchGiven
         }).then(function(result) {

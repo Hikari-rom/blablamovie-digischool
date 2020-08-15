@@ -1,5 +1,4 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique} from "typeorm";
-import {Choice} from "../choice/choice.entity";
+import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique} from "typeorm";
 
 @Entity("users")
 @Unique(["email"])
