@@ -8,9 +8,9 @@ import {ChoiceModule} from "../choice/choice.module";
 
 @Module(
     {
-        imports: [TypeOrmModule.forFeature([User]), ChoiceModule],
+        imports: [TypeOrmModule.forFeature([User])],
         controllers: [UserController],
-        providers: [UserService,ChoiceService]
+        providers: [UserService]
     }
 )
 export class UserModule{}

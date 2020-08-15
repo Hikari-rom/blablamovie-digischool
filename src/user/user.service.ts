@@ -3,7 +3,6 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {User} from "./user.entity";
 import {Repository} from "typeorm";
 import {CreateUserDto} from "./create-user.dto";
-import {ChoiceService} from "../choice/choice.service";
 
 
 @Injectable()
@@ -11,7 +10,6 @@ export class UserService {
     constructor(
         @InjectRepository(User)
         private usersRepository: Repository<User>,
-        private choiceService: ChoiceService
     )
     {}
 
@@ -33,7 +31,7 @@ export class UserService {
         }).catch(function(error){
             return error;
         });
-        return this.choiceService.insertChoice(userId, choice);
-        // return choice;
+        // return this.choiceService.insertChoice(userId, choice);
+        return choice;
     }
 }
