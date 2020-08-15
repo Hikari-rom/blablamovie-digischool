@@ -3,6 +3,8 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {User} from "./user.entity";
 import {Repository} from "typeorm";
 import {CreateUserDto} from "./create-user.dto";
+import * as omdb from "omdbapi";
+import {ConfigService} from "@nestjs/config";
 
 
 @Injectable()
@@ -10,6 +12,7 @@ export class UserService {
     constructor(
         @InjectRepository(User)
         private usersRepository: Repository<User>,
+        private configService: ConfigService
     )
     {}
 
@@ -21,9 +24,8 @@ export class UserService {
         return this.usersRepository.insert(userReceived);
     }
     insertChoice(): any {
-        const omdb = new (require('omdbapi'))('6478392d');
-        const userId = 1;
-        const choice = omdb.search({
+        const omdbapi = new omdb(this.configService.get<string>('OMDBAPI_KEY'));
+        const choice = omdbapi.search({
             search: 'sonic'
         }).then(function(result) {
             const selected = result[0];
