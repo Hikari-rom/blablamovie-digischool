@@ -24,7 +24,7 @@ export class Choice
     @Column()
     filmId: string;
 
-    @ManyToOne(type => User, {primary:true})
+    @ManyToOne(() => User, {primary:true})
     user: number;
 
     @Column()
