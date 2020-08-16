@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Post} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, Post} from "@nestjs/common";
 import {ChoiceService} from "./choice.service";
 import {Choice} from "./choice.entity";
 import {CreateChoiceDto} from "./create-choice.dto";
@@ -10,14 +10,14 @@ export class ChoiceController {
 
     @Post()
     addNewChoice(@Body() createChoiceDto: CreateChoiceDto): Promise<Choice>{
-        return this.choiceService.insertChoice(createChoiceDto.userId,createChoiceDto.search);
+        return this.choiceService.insert(createChoiceDto.userId,createChoiceDto.search);
     }
-    @Delete()
-    deleteChoice({number: choiceId}): string{
-        return this.choiceService.deleteChoice(choiceId);
+    @Delete(':id')
+    deleteChoice(@Param('id') id): string{
+        return this.choiceService.delete(id);
     }
     @Get()
     getUsersChoice({number: userId}): string{
-        return this.choiceService.getUserChoice(userId);
+        return this.choiceService.getUserChoices(userId);
     }
 }
