@@ -7,13 +7,15 @@ import {ConfigService} from "@nestjs/config";
 @Injectable()
 export class ChoiceService
 {
-    constructor(
+    constructor
+    (
         @InjectRepository(Choice)
         private choiceRepository: Repository<Choice>,
         private configService: ConfigService
-    )
-    {}
-    insertChoice(userId: number,searchGiven: string): any{
+    ) {}
+
+    insertChoice(userId: number,searchGiven: string): any
+    {
         const omdbapi = new Omdb(this.configService.get<string>('OMDBAPI_KEY'));
         const choiceReceived =  omdbapi.search({
             search: searchGiven
@@ -29,5 +31,16 @@ export class ChoiceService
         // const resultInsert = this.choiceRepository.insert(choiceReceived);
         // const choiceReceived = new Choice(chosenMovie.imdbid,userId,1,1);
         // return resultInsert;
+    }
+
+    deleteChoice(choiceId: number): any
+    {
+        return this.choiceRepository.delete(choiceId);
+    }
+
+    getUserChoice(user: number): any
+    {
+        return this.choiceRepository.createQueryBuilder("choices")
+            .where("userId = :id", { id: user});
     }
 }

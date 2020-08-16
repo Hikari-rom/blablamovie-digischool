@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Post} from "@nestjs/common";
+import {Body, Controller, Get, Post} from "@nestjs/common";
 import {CreateUserDto} from "./create-user.dto";
 import {UserService} from "./user.service";
 
@@ -11,25 +11,15 @@ export class UserController {
     createUser(@Body() createUser: CreateUserDto): {email: string, birthDate: Date} {
         return this.userService.insertUser(createUser);
     }
+
     @Get('listChoice')
     getUsersWithChoice(): string {
         return "truc";
     }
+
     @Get('findAll')
     getAllUsers(): any {
         return this.userService.insertChoice();
-    }
-    @Post(':userId/choices')
-    addNewChoice(): string{
-        return "Choix enregistré";
-    }
-    @Delete(':userId/choices/:choice')
-    deleteChoice(): string{
-        return "Choix détruit";
-    }
-    @Get(':userId/choices')
-    getAllChoicesOfUser(): string{
-        return "Choix utilisateur";
     }
 }
 
