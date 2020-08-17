@@ -15,27 +15,27 @@ export class UserService {
     return this.usersRepository.find();
   }
 
-  insertUser(createInformations: CreateUserDto): any {
+  insertUser(createInformations: CreateUserDto): Promise<User> {
     const userReceived = new User(
       createInformations.email,
       createInformations.pseudo,
       new Date(createInformations.birthDate),
     );
-    return this.usersRepository.insert(userReceived);
+    return this.usersRepository.save(userReceived);
   }
 
   insertChoice(): Promise<User[]> {
     return this.usersRepository.find({ id: 1 });
   }
 
-  getUsersWithChoice(): Promise<User[]> {
-    return this.usersRepository.find({ relations: ['choices'] });
-    // return this.usersRepository.find({ join: { alias: 'choices', innerJoinAndSelect: { choices: 'choices.user' } } });
-    // return this.usersRepository
-    //   .createQueryBuilder('choices')
-    //   .innerJoin('choices.user', 'c')
-    //   .getMany();
-  }
+  // getUsersWithChoice(): Promise<User[]> {
+  //   return this.usersRepository.find({ relations: ['choices'] });
+  //   // return this.usersRepository.find({ join: { alias: 'choices', innerJoinAndSelect: { choices: 'choices.user' } } });
+  //   // return this.usersRepository
+  //   //   .createQueryBuilder('choices')
+  //   //   .innerJoin('choices.user', 'c')
+  //   //   .getMany();
+  // }
 
   findOne(id: number): Promise<User> {
     return this.usersRepository.findOne(id);

@@ -19,7 +19,7 @@ export class ChoiceController {
   }
 
   @Get()
-  getUsersChoice(@Query() query): Promise<Choice[]> {
-    return this.choiceService.getUserChoices(query.userId);
+  getUsersChoice(@Query('userId') userId: number): Promise<Choice[]> {
+    return this.choiceService.getUserChoices(userId);
   }
 }

@@ -8,14 +8,14 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Post()
-  createUser(@Body() createUser: CreateUserDto): { email: string; birthDate: Date } {
+  createUser(@Body() createUser: CreateUserDto): Promise<User> {
     return this.userService.insertUser(createUser);
   }
 
-  @Get('listChoice')
-  getUsersWithChoice(): Promise<User[]> {
-    return this.userService.getUsersWithChoice();
-  }
+  // @Get('listChoice')
+  // getUsersWithChoice(): Promise<User[]> {
+  //   return this.userService.getUsersWithChoice();
+  // }
 
   @Get('findAll')
   getAllUsers(): any {

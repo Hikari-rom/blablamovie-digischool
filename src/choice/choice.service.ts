@@ -38,8 +38,20 @@ export class ChoiceService {
     return this.choiceRepository.find();
   }
 
-  getBestMovie(): string {
-    // return this.choiceRepository.findAndCount();
-    return 'truc';
+  async getBestMovie(): Promise<{ movieId: string; count: number }[]> {
+    return await this.choiceRepository
+      .createQueryBuilder('choices')
+      .select('filmId')
+      .addSelect('COUNT(*) as count')
+      .groupBy('choices.filmId')
+      .orderBy('count', 'DESC')
+      .getRawMany();
+  }
+
+  async getCountMovie(filmId: string): Promise<number> {
+    return await this.choiceRepository
+      .createQueryBuilder('choices')
+      .where('choices.filmId = :id', { id: filmId })
+      .getCount();
   }
 }

@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { ChoiceModule } from './choice/choice.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MovieModule } from './movie/movie.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
     UserModule,
     ChoiceModule,
+    MovieModule,
   ],
   controllers: [],
   providers: [AppService],
