@@ -12,13 +12,8 @@ export class UserController {
     return this.userService.insertUser(createUser);
   }
 
-  // @Get('listChoice')
-  // getUsersWithChoice(): Promise<User[]> {
-  //   return this.userService.getUsersWithChoice();
-  // }
-
-  @Get('findAll')
-  getAllUsers(): any {
-    return this.userService.insertChoice();
+  @Get('')
+  getAllUsers(): Promise<User[]> {
+    return this.userService.find();
   }
 }
