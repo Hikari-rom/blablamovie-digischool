@@ -20,10 +20,4 @@ export class Movie {
     choice => choice.movie,
   )
   choices: Choice[];
-
-  @OneToMany(
-    () => User,
-    user => user.movie,
-  )
-  users: User[];
 }

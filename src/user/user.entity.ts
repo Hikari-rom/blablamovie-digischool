@@ -26,12 +26,6 @@ export class User {
   )
   choices: Choice[];
 
-  @ManyToOne(
-    () => Movie,
-    movie => movie.users,
-  )
-  movie: Movie;
-
   constructor(mail: string, pseudo: string, birth: Date) {
     this.email = mail;
     this.pseudo = pseudo;

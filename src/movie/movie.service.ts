@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import * as Omdb from 'omdbapi';
 import { ConfigService } from '@nestjs/config';
 import { Movie } from './movie.entity';
@@ -42,9 +42,13 @@ export class MovieService {
   async getMovie(idMovie: string): Promise<Movie> {
     return {
       count: await this.getCountMovie(idMovie),
-      ...(await this.movieRepository.findOne(idMovie, {
-        relations: ['choices', 'choices.user'],
-      })),
+      ...(await this.movieRepository
+        .findOneOrFail(idMovie, {
+          relations: ['choices', 'choices.user'],
+        })
+        .catch(e => {
+          throw new NotFoundException();
+        })),
     };
   }
 
@@ -72,13 +76,20 @@ export class MovieService {
   }
 
   async saveFromOMDB(imdbId: string): Promise<Movie> {
-    const movie = await this.omdbapi
+    const movie = await this.getFromOMDB(imdbId);
+    if (imdbId == 'tt0232500') {
+      movie.title = 'Rapides et Dangereux';
+    }
+    return this.movieRepository.save(movie);
+  }
+
+  async getFromOMDB(imdbId: string): Promise<Movie> {
+    return await this.omdbapi
       .get({
         id: imdbId,
       })
       .then(function(result) {
         return { id: imdbId, title: result.title, poster: result.poster };
       });
-    return this.movieRepository.save(movie);
   }
 }
