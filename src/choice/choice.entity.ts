@@ -1,35 +1,31 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
-import {User} from "../user/user.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { User } from '../user/user.entity';
 
-@Entity("choices")
-export class Choice
-{
+@Entity('choices')
+@Unique(['user', 'weekNumber', 'year', 'filmId'])
+export class Choice {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    constructor(
-        film: string,
-        user: number,
-        weekNumber: number,
-        year: number
-    )
-    {
-        this.filmId = film;
-        this.user = user;
-        this.weekNumber = weekNumber;
-        this.year = year;
-    }
+  @Column()
+  filmId: string;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @ManyToOne(
+    () => User,
+    user => user.choices,
+  )
+  user: User;
 
-    @Column()
-    filmId: string;
+  @Column()
+  weekNumber: number;
 
-    @ManyToOne(() => User)
-    user: number;
+  @Column()
+  year: number;
 
-    @Column()
-    weekNumber: number;
-
-    @Column()
-    year: number;
+  constructor(film: string, user: User, weekNumber: number, year: number) {
+    this.filmId = film;
+    this.user = user;
+    this.weekNumber = weekNumber;
+    this.year = year;
+  }
 }

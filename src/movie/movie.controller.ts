@@ -1,9 +1,12 @@
-import {Controller, Get} from "@nestjs/common";
+import { Controller, Get } from '@nestjs/common';
+import { MovieService } from './movie.service';
 
 @Controller('movie')
 export class MovieController {
-    @Get()
-    getBestFilmWeek(): string{
-        return "truc";
-    }
+  constructor(private movieService: MovieService) {}
+
+  @Get()
+  getBestFilmWeek(): string {
+    return 'truc';
+  }
 }
