@@ -5,6 +5,6 @@ export class CreateChoiceDto {
   @IsInt()
   userId: number;
 
-  @MinLength(2)
-  search: string;
+  @IsNotEmpty()
+  imdbId: string;
 }
