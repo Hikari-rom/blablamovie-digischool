@@ -1,11 +1,11 @@
-import {Module} from "@nestjs/common";
-import {MovieController} from "./movie.controller";
+import { Module } from '@nestjs/common';
+import { MovieController } from './movie.controller';
+import { ChoiceModule } from '../choice/choice.module';
+import { MovieService } from './movie.service';
 
-@Module(
-    {
-        imports: [],
-        controllers: [MovieController],
-        providers: []
-    }
-)
-export class MovieModule{}
+@Module({
+  imports: [ChoiceModule],
+  controllers: [MovieController],
+  providers: [MovieService],
+})
+export class MovieModule {}
