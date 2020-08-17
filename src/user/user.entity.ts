@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { Choice } from '../choice/choice.entity';
+import { Movie } from '../movie/movie.entity';
 
 @Entity('users')
 @Unique(['email'])
@@ -24,6 +25,12 @@ export class User {
     choice => choice.user,
   )
   choices: Choice[];
+
+  @ManyToOne(
+    () => Movie,
+    movie => movie.users,
+  )
+  movie: Movie;
 
   constructor(mail: string, pseudo: string, birth: Date) {
     this.email = mail;
