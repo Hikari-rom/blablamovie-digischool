@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { Choice } from '../choice/choice.entity';
-import { User } from '../user/user.entity';
 
 @Entity('movies')
 export class Movie {

@@ -40,7 +40,7 @@ export class ChoiceService {
   }
 
   getUserChoices(userId: number): Promise<Choice[]> {
-    return this.choiceRepository.find();
+    return this.choiceRepository.find({ id: userId });
   }
 
   getCountChoices(userId: number): Promise<number> {

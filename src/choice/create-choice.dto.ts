@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty, MinLength } from 'class-validator';
+import { IsInt, IsNotEmpty } from 'class-validator';
 
 export class CreateChoiceDto {
   @IsNotEmpty()
