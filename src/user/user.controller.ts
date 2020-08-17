@@ -14,7 +14,7 @@ export class UserController {
     return this.userService.insertUser(createUser);
   }
 
-  @Get('')
+  @Get()
   getAllUsers(): Promise<User[]> {
     return this.userService.find();
   }
