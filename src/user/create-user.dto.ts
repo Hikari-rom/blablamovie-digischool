@@ -1,5 +1,12 @@
-export class CreateUserDto{
-    email: string;
-    pseudo: string;
-    birthDate: Date;
+import { IsDate, IsEmail, IsNotEmpty } from 'class-validator';
+
+export class CreateUserDto {
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  pseudo: string;
+
+  @IsDate()
+  birthDate: Date;
 }
